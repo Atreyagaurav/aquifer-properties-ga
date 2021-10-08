@@ -44,7 +44,7 @@ class AquiferSystem:
     def contaminant_dispersion(self):
         self.contaminant = filters.gaussian_filter(
             self.contaminant,
-            5)
+            .2)
 
     def show_contaminants(self):
         for row in range(self.shape[0]):
@@ -60,3 +60,4 @@ syst = AquiferSystem(wells=WELL_POSITIONS,
 
 syst.show_contaminants()
 syst.contaminant_dispersion()
+syst.show_contaminants()
