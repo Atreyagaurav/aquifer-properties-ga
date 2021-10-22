@@ -9,8 +9,8 @@ import config
 
 model = EquationModel()
 
-s_poss = np.logspace(PARA_MIN_LOG_S, PARA_MAX_LOG_S, 200)
-t_poss = np.logspace(PARA_MIN_LOG_T, PARA_MAX_LOG_T, 100)
+s_poss = np.logspace(config.PARA_MIN_LOG_S, config.PARA_MAX_LOG_S, 200)
+t_poss = np.logspace(config.PARA_MIN_LOG_T, config.PARA_MAX_LOG_T, 100)
 
 # filled these by looking at the solution
 s_poss2 = np.logspace(-4.3, -4.4, 200)
