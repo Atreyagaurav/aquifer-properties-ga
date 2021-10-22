@@ -54,8 +54,8 @@ class Population:
         self.model = EquationModel(*model_args, **model_kwargs)
         self.organisms = sorted([
             Organism(self.model,
-                     math.pow(10,random.random()*(-12)-2),
-                     math.pow(10,random.random()*(6)-3),
+                     math.pow(10,random.random()*(config.PARA_MAX_LOG_S-config.PARA_MIN_LOG_S)+config.PARA_MIN_LOG_S),
+                     math.pow(10,random.random()*(config.PARA_MAX_LOG_T-config.PARA_MIN_LOG_T)+config.PARA_MIN_LOG_T),
                      ) for i in range(size)],
                            key=lambda org: org.error)
 
@@ -78,7 +78,7 @@ class Population:
         
 
 if __name__ == '__main__':
-    p = Population(100)
+    p = Population()
     best_model = p.organisms[0]
     print("Press Ctrl+C to end.")
     print("*" * 100)
