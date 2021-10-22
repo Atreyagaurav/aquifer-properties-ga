@@ -1,2 +1,8 @@
 * Using GA to determine the aquifer properties
   Source code files for Sys/Hydr System Analysis term project. 
+
+** Theis Solution
+  Theis developed an analytic solution for the relationship between the drawdown and the 
+  distance from the pumping well for confined aquifer. We are going to use
+  that solution to find the aquifer properties. '
+  
