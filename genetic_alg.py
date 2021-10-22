@@ -38,7 +38,7 @@ class Organism:
         mutation = random.random() > config.GA_MUTATION_RATE
         new_para = crossover * para1 + (1-crossover) * para2
         if mutation:
-            new_para *= (1 + 0.05 * (0.5 - random.random()))
+            new_para *= (1 + config.GA_MUTATION_CHANGE * (0.5 - random.random()))
         return new_para
 
     def __str__(self):
