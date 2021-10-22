@@ -7,17 +7,17 @@ import itertools
 from genetic_alg import Population
 
 
-NUM_DIV = 5
-num_child = np.linspace(5, 20, NUM_DIV, dtype=int)
-elite_choice = np.linspace(5, 20, NUM_DIV, dtype=int)
-mutation_rat = np.linspace(5, 20, NUM_DIV)/100
-mutation_change = np.linspace(5, 40, NUM_DIV)/200
-crossover = np.linspace(5, 20, NUM_DIV) / 40 
+NUM_DIV = 10
+num_child = np.linspace(2, 22, NUM_DIV, dtype=int)
+elite_choice = np.linspace(2, 22, NUM_DIV, dtype=int)
+mutation_rat = np.linspace(0, 20, NUM_DIV)/100
+mutation_change = np.linspace(0, 40, NUM_DIV)/200
+crossover = np.linspace(0, 20, NUM_DIV) / 40 
 
 index = itertools.product(range(NUM_DIV), repeat=5)
 
 
-df = pd.DataFrame([], columns=['sn','population','elite_rate', 'crossover', 'mutation', 'filename', 'error', 'generations'])
+df = pd.DataFrame([], columns=['sn','population','elite_rate', 'crossover', 'mutation_rate', 'mutation_change', 'filename', 'error', 'generations'])
 for c, ind in enumerate(index):
     config.GA_NUM_CHILD = num_child[ind[0]]
     config.GA_ELITE_CHOICE = num_child[ind[1]]
@@ -30,10 +30,11 @@ for c, ind in enumerate(index):
     
     df.loc[c,:] = [
         c,
-        config.GA_NUM_CHILD,
+        config.GA_POPULATION_SIZE,
         config.GA_ELITE_RATIO,
         config.GA_MAX_CROSSOVER,
         config.GA_MUTATION_RATE,
+        config.GA_MUTATION_CHANGE,
         log_file,
         0,
         0
