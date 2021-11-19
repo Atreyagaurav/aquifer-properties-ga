@@ -9,6 +9,7 @@ import pandas as pd
 
 from genetic_alg import Population
 import utilities
+import config
 
 colors10_rev = list(mcolors.TABLEAU_COLORS)
 allcolors_rev = ['black'] * (100-len(colors10_rev)) + colors10_rev
@@ -84,7 +85,7 @@ def init():
     main.set_xlim(1e-14, 1e-2)
     top.set_ylim(5, 6)
     top.set_xlim(4e-5, 5e-5)
-    bottom.set_xlim(0, 30)
+    bottom.set_xlim(0, config.GA_GENERATIONS)
     population = Population()
     bottom.set_ylim(0, 0.25)
     best_model = population.organisms[0]
@@ -121,13 +122,13 @@ def update(frame):
 anim = FuncAnimation(fig, update,
                      repeat=False,
                      blit=False,
-                     frames=45,
+                     frames=config.GA_GENERATIONS,
                      cache_frame_data=False,
                      save_count=1,
                      init_func=init)
 
 
-writer = PillowWriter(fps=3)
+writer = PillowWriter(fps=10)
 anim.save("/tmp/anim.gif", writer=writer)
 print("Animation saved in {}".format("/tmp/anim.gif"))
 
