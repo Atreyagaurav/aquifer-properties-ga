@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import gc
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
@@ -12,8 +13,8 @@ import utilities
 import config
 
 colors10_rev = list(mcolors.TABLEAU_COLORS)
-allcolors_rev = ['black'] * (100-len(colors10_rev)) + colors10_rev
-allsize_rev = np.array([.4] * (100-len(colors10_rev)) + [1]*len(colors10_rev))
+allcolors_rev = ['black'] * (config.GA_POPULATION_SIZE-len(colors10_rev)) + colors10_rev
+allsize_rev = np.array([.4] * (config.GA_POPULATION_SIZE-len(colors10_rev)) + [1]*len(colors10_rev))
 
 with plt.style.context(("ggplot", "seaborn")):
     fig = plt.figure(constrained_layout=True, figsize=(16, 9))
@@ -50,10 +51,10 @@ with plt.style.context(("ggplot", "seaborn")):
     imgplot2 = top.pcolormesh(s_poss2,t_poss2,e2, cmap='gist_rainbow', shading='auto', alpha=0.5)
     cb2 = plt.colorbar(imgplot2, ax=top)
     # imgplot.set_cmap('nipy_spectral')
-    population_plt = main.scatter(range(100), range(100), c=allcolors_rev, s = allsize_rev*20)
-    zoom_plt = top.scatter(range(100), range(100), c=allcolors_rev, alpha=0.7,  s = allsize_rev*30)
-    err_plts = list(reversed([bottom.plot(range(100),
-                            range(100),
+    population_plt = main.scatter(range(config.GA_POPULATION_SIZE), range(config.GA_POPULATION_SIZE), c=allcolors_rev, s = allsize_rev*20)
+    zoom_plt =        top.scatter(range(config.GA_POPULATION_SIZE), range(config.GA_POPULATION_SIZE), c=allcolors_rev, s = allsize_rev*20)
+    err_plts = list(reversed([bottom.plot(range(config.GA_GENERATIONS),
+                            range(config.GA_GENERATIONS),
                             linewidth=2,
                             alpha=1,
                             color=colors10_rev[i])[0]
@@ -68,6 +69,8 @@ with plt.style.context(("ggplot", "seaborn")):
     top.set_title("Solution Range")
     top.set_xlabel("Storativity →")
     top.set_ylabel("Transmissivity →")
+    curve.set_xlabel("Time →")
+    curve.set_ylabel("Drawdown →")
     bottom.set_title("Mean Absolute Error")
 
 
