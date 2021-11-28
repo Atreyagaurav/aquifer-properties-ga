@@ -6,7 +6,7 @@
 
 #include "model.h"
 
-const int genome_length=75;
+const int genome_length=30;
 const int num_para=2;
 const int mutation_chance=5;
 const int gene_length=genome_length*num_para;
@@ -23,7 +23,6 @@ const int generations=1000;
 
 void print_gene(_Bool* gene){
   int i;
-  /* char *gene_str = malloc(sizeof(char)*genome_length); */
   for (i=0; i<gene_length; i++){
     putchar('0' + *(gene+i));
   }
@@ -31,7 +30,6 @@ void print_gene(_Bool* gene){
 
 void random_gene(_Bool* gene){
   int i;
-  /* char *gene_str = malloc(sizeof(char)*genome_length); */
   for (i=0; i<gene_length; i++){
     *(gene+i) = random()>(RAND_MAX/2)?1:0;
   }
@@ -39,15 +37,13 @@ void random_gene(_Bool* gene){
 
 void fill_gene(_Bool* gene, _Bool value){
   int i;
-  /* char *gene_str = malloc(sizeof(char)*genome_length); */
   for (i=0; i<gene_length; i++){
     *(gene+i) = value;
   }
 }
 
-void custom_gene(_Bool* gene, char * gene_str){
+void custom_gene(_Bool* gene, char* gene_str){
   int i;
-  /* char *gene_str = malloc(sizeof(char)*genome_length); */
   for (i=0; i<gene_length; i++){
     *(gene+i) = *(gene_str+i)-'0';
   }
@@ -55,7 +51,6 @@ void custom_gene(_Bool* gene, char * gene_str){
 
 void mutate_gene(_Bool* gene){
   int i;
-  /* char *gene_str = malloc(sizeof(char)*genome_length); */
   for (i=0; i<gene_length; i++){
     if (random()%100 < mutation_chance){
     *(gene+i) = 1 - *(gene+i);
@@ -63,7 +58,7 @@ void mutate_gene(_Bool* gene){
   }
 }
 
-double decode_genome(_Bool *gene){
+double decode_genome(_Bool* gene){
   double val=1.0/(pow(2, genome_length));
   double factor=0.5;
   int i;
@@ -76,14 +71,14 @@ double decode_genome(_Bool *gene){
   return val;
 }
 
-double get_parameter(_Bool *gene, double min, double max, int index){
+double get_parameter(_Bool* gene, double min, double max, int index){
   /* index = 0 for storativity, 1 for transmissivity */
   double factor = decode_genome(gene + index*genome_length);
   double real_factor = (max-min)*factor + min;
   return pow(10, real_factor);
 }
 
-void crossover(_Bool *gene1, _Bool* gene2, _Bool *target){
+void crossover(_Bool* gene1, _Bool* gene2, _Bool* target){
   int i, j;
   for(i=0; i<gene_length; i++){
     *(target+i) = *(gene1+i);
@@ -97,14 +92,20 @@ void crossover(_Bool *gene1, _Bool* gene2, _Bool *target){
   }}
 }
 
-void sort_genes(_Bool *genes, int *index){
+void sort_genes(_Bool* genes, int* index){
   double *mae = malloc(population*sizeof(double));
   int i;
   double S, T;
   
   for(i=0; i<population; i++){
-    S = get_parameter(genes+i*gene_length, PARA_MIN_LOG_S, PARA_MAX_LOG_S, 0);
-    T = get_parameter(genes+i*gene_length, PARA_MIN_LOG_T, PARA_MAX_LOG_T, 1);
+    S = get_parameter(genes+i*gene_length,
+		      PARA_MIN_LOG_S,
+		      PARA_MAX_LOG_S,
+		      0);
+    T = get_parameter(genes+i*gene_length,
+		      PARA_MIN_LOG_T,
+		      PARA_MAX_LOG_T,
+		      1);
     *(mae+i) = calculate_mae_ST(S, T);
     }
   
@@ -122,10 +123,14 @@ void initialize_population(_Bool *genes){
     /* fill_gene(genes+i*gene_length, 0); */
     random_gene(genes + i);
   }
-  /* custom_gene(genes+0*gene_length, "1101001101001110001010100010100100000000"); */
-  /* custom_gene(genes+1*gene_length, "0110000001110000000011000100001000001000"); */
-  /* custom_gene(genes+2*gene_length, "1011101010010101111110101101001111111011"); */
-  /* custom_gene(genes+3*gene_length, "1100111001110010111110100011010010011010"); */
+  /* custom_gene(genes+0*gene_length, */
+  /* 	      "1101001101001110001010100010100100000000"); */
+  /* custom_gene(genes+1*gene_length, */
+  /* 	      "0110000001110000000011000100001000001000"); */
+  /* custom_gene(genes+2*gene_length, */
+  /* 	      "1011101010010101111110101101001111111011"); */
+  /* custom_gene(genes+3*gene_length, */
+  /* 	      "1100111001110010111110100011010010011010"); */
 }
 
 void print_population(_Bool *genes, int *index){
@@ -167,7 +172,7 @@ void print_population_mae(_Bool *genes, int *index){
   gene = genes+ *(index+i) *gene_length;
   S = get_parameter(gene, PARA_MIN_LOG_S, PARA_MAX_LOG_S, 0);
   T = get_parameter(gene, PARA_MIN_LOG_T, PARA_MAX_LOG_T, 1);
-  /* print_gene(gene); */
+  print_gene(gene);
   printf(" %e", S);
   printf(" %f", T);
   printf(" %f\n", calculate_mae_ST(S, T));
