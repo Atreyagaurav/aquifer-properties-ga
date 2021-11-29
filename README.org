@@ -5,4 +5,12 @@
   Theis developed an analytic solution for the relationship between the drawdown and the 
   distance from the pumping well for confined aquifer. We are going to use
   that solution to find the aquifer properties. '
+
+* How to Run the Codes:
+  The Parameters are in ~config.py~ file, you can change different parameters and the observation data from that file.
   
+  Run ~genetic_alg.py~ to run the main genetic algorithm, you can stop it using ~Ctrl+C~ in the terminal.
+
+  Run ~visualize.py~ to make the animation of solution, it'll save a gif with name ~anim.gif~ in the current folder.
+
+  There are some codes in the plot directory for plotting the results. Some are in ~gnuplot~ some are in ~R~, you can use that, or make your own plots from the data saved in ~data/models.csv~ which contains the results from ~3125~ simulations run during parameter tuning. 

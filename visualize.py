@@ -132,8 +132,8 @@ anim = FuncAnimation(fig, update,
 
 
 writer = PillowWriter(fps=10)
-anim.save("/tmp/anim.gif", writer=writer)
-print("Animation saved in {}".format("/tmp/anim.gif"))
+anim.save("anim.gif", writer=writer)
+print("Animation saved in {}".format("anim.gif"))
 
 # plt.show()
 
