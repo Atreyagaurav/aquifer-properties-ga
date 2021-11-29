@@ -13,4 +13,15 @@
 
   Run ~visualize.py~ to make the animation of solution, it'll save a gif with name ~anim.gif~ in the current folder.
 
-  There are some codes in the plot directory for plotting the results. Some are in ~gnuplot~ some are in ~R~, you can use that, or make your own plots from the data saved in ~data/models.csv~ which contains the results from ~3125~ simulations run during parameter tuning. 
+  There are some codes in the plot directory for plotting the results. Some are in ~gnuplot~ some are in ~R~, you can use that, or make your own plots from the data saved in ~data/models.csv~ which contains the results from ~3125~ simulations run during parameter tuning.
+
+* Results
+  Main results can be seen in the [[./final_docs/presentation.pdf]]
+  
+** First 3 Generations
+
+   [[./plots/images/gen-first3.png]]
+
+** Animation of GA running
+
+   [[./plots/animation.gif]]
