@@ -24,4 +24,4 @@
 
 ** Animation of GA running
 
-   [[./plots/animation.gif]]
+   [[./plots/animation-first5.gif]]
