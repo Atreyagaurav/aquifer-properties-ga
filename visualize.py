@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.image as mpimg
 import matplotlib.colors as mcolors
-from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation, FFMpegWriter
 import numpy as np
 import pandas as pd
 
@@ -131,9 +131,9 @@ anim = FuncAnimation(fig, update,
                      init_func=init)
 
 
-writer = PillowWriter(fps=10)
-anim.save("anim.gif", writer=writer)
-print("Animation saved in {}".format("anim.gif"))
+writer = FFMpegWriter(fps=10)
+anim.save("/tmp/anim.mkv", writer=writer)
+print("Animation saved in {}".format("/tmp/anim.mkv"))
 
 # plt.show()
 
